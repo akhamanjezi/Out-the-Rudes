@@ -8,5 +8,13 @@
 2. With python installed, run the following in your terminal:
 
 ```zsh
-$ python out_the_rudes.py --following following.json --followers followers.json
+$   python out_the_rudes.py --following following.json --followers followers.json
+
+Followers: 0
+Following: 1
+Rudes: 1
+
+Rude Accounts:
+
+akhamanjezi
 ```
