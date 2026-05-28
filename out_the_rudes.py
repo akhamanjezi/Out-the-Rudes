@@ -1,12 +1,13 @@
 """Out the Rudes — find who doesn't follow you back from an Instagram JSON export.
 
-Mirrors the parsing/classification logic of the Out the Rudes iOS app
-(InstagramExportParser + InstagramImportService):
+Instagram's export has shifted layouts over time, so usernames can live in
+different fields:
 
   * followers live in `followers_*.json` as a top-level JSON array; the username
     is `string_list_data[0].value`.
-  * following lives in `following.json` under `relationships_following`; the
-    username is the entry's top-level `title` (NOT inside string_list_data).
+  * following lives in `following.json` under `relationships_following`; newer
+    exports put the username in the entry's top-level `title`, older ones put it
+    in `string_list_data[0].value`.
   * matching is case-insensitive (trim + lowercase).
   * timestamps of 0 / missing mean "no date".
 """
@@ -22,7 +23,7 @@ FOLLOWING_BASENAME = "following.json"
 
 
 # --------------------------------------------------------------------------- #
-# Parsing (mirrors InstagramExportParser)
+# Parsing
 # --------------------------------------------------------------------------- #
 
 def _normalize(username):
@@ -79,7 +80,7 @@ def parse_following(payload):
 
 
 # --------------------------------------------------------------------------- #
-# Classification (mirrors InstagramImportService.buildAccounts / AccountRole)
+# Classification
 # --------------------------------------------------------------------------- #
 
 class Account:

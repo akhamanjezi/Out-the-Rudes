@@ -175,7 +175,7 @@ class LoadFromDirAndZipTests(unittest.TestCase):
 
 
 class EndToEndTests(unittest.TestCase):
-    """Mirrors the iOS test fixtures' golden dataset."""
+    """End-to-end over a representative dataset."""
 
     def setUp(self):
         self.tmp = tempfile.mkdtemp()
@@ -194,7 +194,7 @@ class EndToEndTests(unittest.TestCase):
             entry(title="missing_timestamp", href="https://www.instagram.com/missing_timestamp"),
         ]})
 
-    def test_classification_matches_app(self):
+    def test_classification(self):
         followers, following = otr.load_from_dir(self.tmp)
         accounts = otr.build_accounts(followers, following)
         by_role = {}
